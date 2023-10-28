@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Log Monitoring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2c3e50; /* Gun Metal Color */
+            color: #ecf0f1; /* Light Text */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #34495e; /* Darker Shade for Container */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #logOutput {
+            height: 300px;
+            width: 100%;
+            background-color: #ecf0f1; /* Light Background for Logs */
+            color: #2c3e50; /* Dark Text for Logs */
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: monospace;
+            overflow-y: scroll;
+        }
+
+        .suspicious-log {
+            color: #e74c3c; /* Red color for suspicious logs */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Insider Threat Detection System</h1>
+        <textarea id="logOutput" readonly></textarea>
+    </div>
+
+    <script>
+        function updateLog(logText, isSuspicious = false, ipAddress = '') {
+            const logOutput = document.getElementById('logOutput');
+            if (isSuspicious) {
+                logText = '<span class="suspicious-log">' + logText + '</span>';
+            }
+            if (ipAddress) {
+                logText += ' IP Address: ' + ipAddress;
+            }
+            logOutput.innerHTML += logText + '\n';
+            logOutput.scrollTop = logOutput.scrollHeight;
+        }
+
+        // Simulate real-time log updates (replace this with actual log updates)
+        setInterval(function() {
+            const randomLog = 'New log entry: ' + Math.random().toString(36).substr(2, 5);
+            updateLog(randomLog);
+            
+            // Simulate suspicious network activity
+            const suspiciousLog = 'Suspicious network activity detected!';
+            const randomIP = Array.from({length: 4}, () => Math.floor(Math.random() * 256)).join('.');
+            updateLog(suspiciousLog, true, randomIP);
+        }, 2000); // Update every 2 seconds (replace this interval with your actual log update interval)
+    </script>
+</body>
+
+</html>
