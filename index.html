@@ -55,6 +55,21 @@
     </div>
 
     <script>
+        const unixOSNames = [
+            'Linux',
+            'Ubuntu',
+            'Debian',
+            'Fedora',
+            'CentOS',
+            'Red Hat',
+            'UNIX',
+        ];
+
+        function getRandomUnixOSName() {
+            const randomIndex = Math.floor(Math.random() * unixOSNames.length);
+            return unixOSNames[randomIndex];
+        }
+
         function updateLog(logText, isSuspicious = false, ipAddress = '') {
             const logOutput = document.getElementById('logOutput');
             if (isSuspicious) {
@@ -67,10 +82,10 @@
             logOutput.scrollTop = logOutput.scrollHeight;
         }
 
-        // Simulate real-time log updates (replace this with actual log updates)
+        // Simulate real-time log updates with Unix-based OS names
         setInterval(function() {
-            const randomLog = 'New log entry: ' + Math.random().toString(36).substr(2, 5);
-            updateLog(randomLog);
+            const randomOS = getRandomUnixOSName();
+            updateLog('New log entry: ' + randomOS);
             
             // Simulate suspicious network activity
             const suspiciousLog = 'Suspicious network activity detected!';
